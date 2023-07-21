@@ -1,0 +1,44 @@
+{% extends 'auctions/layout.html' %}
+{% block body %}
+{%if user.is_authenticated%}
+{% if watchlists %}
+<h3>You are currently watching</h3>
+{% endif %}
+<div class="card-columns">
+  {% for watchlist in watchlists %}
+
+  {% if watchlist.auction.active == True %}
+  <div class="card">
+  {%else%}
+  {% if watchlist.auction.winner == user.username %}
+      <div class="col mb-4" style="opacity: 0.7;">
+      <div class="card h-100">
+      <h5 style="color:gold; text-align:center;">You won the auction!</h5>
+      {% else %}
+      <div class="col mb-4" style="opacity: 0.5;">
+      <div class="card h-100">
+      <p>Auction is closed. You can view the closed auction</p>
+      {% endif %}
+  {% endif %}
+    <a href="{%url 'auction' watchlist.auction.title %}">
+      {% if watchlist.auction.image %}
+      <img src="{{watchlist.auction.image}}" class="card-img-top">
+      {%endif%}
+
+      <div class="card-body">
+        <h5 class="card-title">{{watchlist.auction.title}}</h5>
+        <p class="card-text">{{watchlist.auction.description}}</p>
+        <p class="card-text">{{watchlist.auction.catelog}}</p>
+        <p class="card-text">By: {{watchlist.auction.owner}}</p>
+        <p class="auction_text">Starting Bid ${{watchlist.auction.bid}}</p>
+        <p class="card-text"><small class="text-muted">Created: {{watchlist.auction.time_created}}</small></p>
+      </div>
+    </a>
+  </div>
+
+  {%empty%}
+  <p>You currently not watching any listings</p>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

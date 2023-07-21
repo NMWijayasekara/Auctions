@@ -1,0 +1,10 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+<h2>Catelogs</h2>
+<hr>
+<!-- Show all the catelogs -->
+{% for catelog in catelogs%}
+<a class="btn btn-info" href="{% url 'view_catelog' catelog%}">{{catelog}}</a>
+{% endfor %}
+{% endblock %}

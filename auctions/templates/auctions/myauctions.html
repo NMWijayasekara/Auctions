@@ -1,0 +1,35 @@
+{% extends 'auctions/layout.html' %}
+{% block body %}
+{%if user.is_authenticated%}
+<div class="card-columns">
+  {% for auction in auctions %}
+
+  {% if auction.active == True %}
+  <div class="card">
+  {%else%}
+  <div class="card" style="opacity: 0.5;">
+  <p>You have closed your auction</p>
+  {% endif %}
+        <a href="{%url 'auction' auction.title %}">
+          {% if auction.image %}
+          <img src="{{auction.image}}" class="card-img-top">
+          {%endif%}
+
+          <div class="card-body">
+            <h5 class="card-title">{{auction.title}}</h5>
+            <p class="card-text">{{auction.description}}</p>
+            <p class="card-text">{{auction.catelog}}</p>
+            <p class="card-text">By: {{auction.owner}}</p>
+            <p class="card-text">Starting Bid ${{auction.bid}}</p>
+            <p class="card-text"><small class="text-muted">Created: {{auction.time_created}}</small></p>
+          </div>
+        </a>
+      </div>
+
+      {%empty%}
+      <p>You have not made any auctions.</p>
+      <a href="{% url 'new' %}">Create Auction</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endblock %}

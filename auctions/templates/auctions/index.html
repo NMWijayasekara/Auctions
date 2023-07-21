@@ -1,0 +1,67 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<!-- Viewing each catelog / heading of catelog name -->
+{% if catelog %}
+<h1>{{catelog}}</h1>
+{% endif %}
+<div class="row row-cols-1 row-cols-md-3">
+  {% for auction in auctions %}
+  <!-- Check if auction is active -->
+  {% if auction.active == True %}
+  <div class="col mb-4">
+    <div class="card h-100">
+      {%else%}
+      {% if auction.winner == user.username %}
+      <div class="col mb-4" style="opacity: 0.7;">
+      <div class="card h-100">
+      <h5 style="color:gold; text-align:center;">You won the auction!</h5>
+      {% else %}
+      <div class="col mb-4" style="opacity: 0.5;">
+      <div class="card h-100">
+      <p>Auction is closed. You can view the closed auction</p>
+      {% endif %}
+  {% endif %}
+
+        <a href="{%url 'auction' auction.title %}">
+          {% if auction.image %}
+          <img src="{{auction.image}}" class="card-img-top">
+          {%endif%}
+
+          <div class="card-body">
+            <h5 class="card-title">{{auction.title}}</h5>
+            <div class="card-body" style="height: 100px;">
+              <p class="card-text">{{auction.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a class="btn btn-info"
+                  href="{% url 'view_catelog' auction.catelog%}">{{auction.catelog}}</a></li>
+              <li class="list-group-item">
+                <p class="card-text">By: {{auction.owner}}</p>
+              </li>
+              <li class="list-group-item">
+                <!-- Check if auction is closed and to see who the winner is -->
+                {% if auction.active == True %}
+                <p class="card-text">Starting Bid ${{auction.bid}}</p>
+                {% else %}
+                {% if auction.winner %}
+                <p class="card-text">Starting Bid ${{auction.bid}} (Auction won by {{auction.winner}})</p>
+                {% else %}
+                <p class="card-text">Starting Bid ${{auction.bid}} (No Auction Winner)</p>
+                {% endif %}
+                {% endif %}
+              </li>
+              <li class="list-group-item">
+                <p class="card-text"><small class="text-muted">Created: {{auction.time_created}}</small></p>
+              </li></span>
+            </ul>
+          </div>
+        </a>
+      </div>
+    </div>
+    {%empty%}
+    <h5 style="color: red;">Sorry. No Auctions</h1>
+    {% endfor %}
+  </div>
+
+  {% endblock %}

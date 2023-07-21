@@ -1,0 +1,28 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<h2 class="form-header"><strong>Create New Auction</strong></h2>
+<div class="form_border">
+{% if message %}
+{{message}}
+{% endif %}
+<form action="{% url 'new' %}" method="post">
+  {% csrf_token %}
+  <input class="form-control" type="text" name="name" placeholder="Item Name " maxlength="40" required/><br>
+  <input class="form-control" type="text" name="image_url" placeholder="Image Url" /><br>
+  <textarea class="form-control" style="resize: none; text-align: left;" name="description" rows="5" placeholder="Item Description" required maxlength="210"></textarea><br>
+  <label for="catelog">Choose a catelog</label>
+  <select name="catelog" required>
+    {% for catelog in catelogs %}
+      <option value="{{catelog}}">{{catelog}}</option>
+    {% endfor %}
+  </select><br>
+  <input class="form-control" type="number" name="bid" min="0" placeholder="$(USD) Starting Bid Amount" equired/><br>
+  <input class="btn btn-primary" type="submit">
+</form>
+</div>
+{% else %}
+<p>Login to create a auction</p>
+{% endif %}
+{% endblock %}

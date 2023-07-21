@@ -1,0 +1,103 @@
+body {
+  padding: 10px;
+}
+ul {
+  list-style: none;
+}
+img{
+  height: 250px;
+  width: 270px;
+  object-fit: cover;
+}
+
+/*Form Styles*/
+.form-header{
+  text-align: center;
+  margin-top: 20px;
+  color: blue;
+}
+.form_border{
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form_border p{
+  text-align: center;
+}
+form{
+  margin: 10px 10px;
+  margin-left: 20px;
+  text-align: center;
+}
+.form-control{
+  width: 400px;
+  text-align: center;
+}
+form select{
+  margin: 2px 3px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Listings Styles*/
+
+.card a{
+  color: #494949;
+}
+.card a:hover{
+  color: #383838;
+}
+a:hover{
+  text-decoration: none;
+}
+
+/*Auction Styles */
+.auction_border{
+  display: flex;
+  flex-wrap: wrap;
+}
+.auction_image{
+  width: 400px;
+  overflow: hidden;
+  margin-top: 60px;
+  margin-left: -150px;
+}
+
+.auction_card{
+  width: 300px;
+  margin-left: 150px;
+}
+
+.auction_title{
+  color: #2222cf;
+  font-weight: bold;
+  margin-left: 200px;
+}
+
+.auction_text{
+  font-size: 19px;
+}
+
+/*Bid Styles*/
+.bid_input{
+  outline: #c2c2c2;
+  padding: 2px 2px;
+}
+/*Comment Styles*/
+.comment-border{
+  border: 1px solid #cfcfcf;
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* WatchList Styles */
+.watchlist{
+  display: none;
+}
+
+/*Catelog Styles*/
+.catelog{
+  display: none;
+}
